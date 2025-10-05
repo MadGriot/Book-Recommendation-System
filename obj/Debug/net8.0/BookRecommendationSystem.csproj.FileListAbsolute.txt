@@ -1,0 +1,15 @@
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\bin\Debug\net8.0\BookRecommendationSystem.exe
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\bin\Debug\net8.0\BookRecommendationSystem.deps.json
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\bin\Debug\net8.0\BookRecommendationSystem.runtimeconfig.json
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\bin\Debug\net8.0\BookRecommendationSystem.dll
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\bin\Debug\net8.0\BookRecommendationSystem.pdb
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\obj\Debug\net8.0\BookRecommendationSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\obj\Debug\net8.0\BookRecommendationSystem.AssemblyInfoInputs.cache
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\obj\Debug\net8.0\BookRecommendationSystem.AssemblyInfo.cs
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\obj\Debug\net8.0\BookRecommendationSystem.csproj.CoreCompileInputs.cache
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\obj\Debug\net8.0\BookRecommendationSystem.sourcelink.json
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\obj\Debug\net8.0\BookRecommendationSystem.dll
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\obj\Debug\net8.0\refint\BookRecommendationSystem.dll
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\obj\Debug\net8.0\BookRecommendationSystem.pdb
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\obj\Debug\net8.0\BookRecommendationSystem.genruntimeconfig.cache
+C:\Users\Insan\source\repos\BookRecommendationSystem\BookRecommendationSystem\obj\Debug\net8.0\ref\BookRecommendationSystem.dll
