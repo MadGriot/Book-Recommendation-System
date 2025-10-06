@@ -11,7 +11,7 @@ namespace BookRecommendationSystem
         public int ISBN { get; set; }
         public required string Author { get; set; }
         public required string Title { get; set; }
-        public DateTime Year { get; set; }
+        public required string Year { get; set; }
 
     }
 }

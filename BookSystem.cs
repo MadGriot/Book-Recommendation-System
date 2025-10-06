@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BookRecommendationSystem
 {
     public static class BookSystem
     {
-        public static List<Rating> Library = new();
+        public static List<Rating> Ratings = new();
+        public static List<Book> Books = new();
+        public static List<Member> Members = new();
         public static void LoginMember(Member member) => member.IsLoggedIn = true;
         public static void LogoutMember(Member member) => member.IsLoggedIn = false;
 
@@ -32,16 +29,60 @@ namespace BookRecommendationSystem
             }
         }
 
-        public static int CountBooks(StreamReader reader)
+        public static int CountAndStoreBooks(StreamReader reader)
         {
             int count = 0;
-
-            while (reader.ReadLine() != null)
+            string? line;
+            while ((line = reader.ReadLine()) != null)
             {
                 count++;
+                string[] bookData = line.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                DateTime date;
+                Book book = new Book()
+                {
+                    ISBN = count,
+                    Author = bookData[0],
+                    Title = bookData[1],
+                    Year = bookData[2]
+                };
+                Books.Add(book);
             }
 
-            return count;
+            return Books.Count;
+        }
+
+        public static int CountAndStoreMembers(StreamReader reader)
+        {
+            int count = 0;
+            string? line;
+            while ((line = reader.ReadLine()) != null )
+            {
+                count++;
+                int memberIndex = 0;
+                if (count % 2 == 0)
+                {
+                    string[] ratingData = line.Split(' ');
+                    for (int i = 0; i < ratingData.Length; i++)
+                    {
+                        if (i >= Books.Count)
+                            break;
+                        Rating rating = new Rating()
+                        {
+                            Book = Books[i],
+                            Member = Members[memberIndex],
+                            RatingNumber = int.Parse(ratingData[i])
+                        };
+                        Ratings.Add(rating);
+                    }
+                    memberIndex++;
+                }
+                else
+                {
+                    Member member = new Member(line);
+                    Members.Add(member);
+                }
+            }
+            return Members.Count;
         }
     }
 }

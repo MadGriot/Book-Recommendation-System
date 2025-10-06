@@ -33,8 +33,10 @@
                     Console.WriteLine("An error has occured.");
                 }
                 Console.WriteLine();
-                int numberOfBooks = BookSystem.CountBooks(booksReader);
+                int numberOfBooks = BookSystem.CountAndStoreBooks(booksReader);
                 Console.WriteLine($"Number of Books: {numberOfBooks}");
+                int numberOfMembers = BookSystem.CountAndStoreMembers(ratingsReader);
+                Console.WriteLine($"Number of Members: {numberOfMembers}");
             }
 
         }
