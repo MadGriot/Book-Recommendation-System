@@ -78,7 +78,7 @@ namespace BookRecommendationSystem
                 }
                 else
                 {
-                    Member member = new Member(line);
+                    Member member = new Member(line, memberIndex);
                     Members.Add(member);
                 }
             }
