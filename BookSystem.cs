@@ -31,5 +31,17 @@ namespace BookRecommendationSystem
                 return rating;
             }
         }
+
+        public static int CountBooks(StreamReader reader)
+        {
+            int count = 0;
+
+            while (reader.ReadLine() != null)
+            {
+                count++;
+            }
+
+            return count;
+        }
     }
 }
