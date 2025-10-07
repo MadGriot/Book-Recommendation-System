@@ -6,9 +6,31 @@ namespace BookRecommendationSystem
         public static List<Rating> Ratings = new();
         public static List<Book> Books = new();
         public static List<Member> Members = new();
-        public static void LoginMember(Member member) => member.IsLoggedIn = true;
-        public static void LogoutMember(Member member) => member.IsLoggedIn = false;
+        //public static void LoginMember(Member member) => member.IsLoggedIn = true;
+        //public static void LogoutMember(Member member) => member.IsLoggedIn = false;
 
+        public static void ViewRatings(int accountNumber)
+        {
+            Member member = Members[accountNumber];
+            List<Rating> memberRatings = Ratings.Where(m => m.Member.AccountNumber == accountNumber).ToList();
+            int indexNumber = 1;
+            Console.WriteLine($"{member.Name} ratings...");
+            foreach (Rating rating in memberRatings)
+            {
+                Console.WriteLine($"{indexNumber}) {rating.Book.Title}, {rating.Book.Year} => rating: {rating.RatingNumber}");
+                indexNumber++;
+            }
+            Console.WriteLine();
+        }
+
+        public static void RateBook(int ISBN, int accountNumber, int ratingNumber)
+        {
+            Book book = Books.First(i => i.ISBN == ISBN);
+            List<Rating> ratings = Ratings.Where(a => a.Member.AccountNumber == accountNumber).ToList();
+            Rating rating = ratings.First(b => b.Book == book);
+            rating.RatingNumber = ratingNumber;
+            Console.WriteLine($"Your new rating for {book.Title}, {book.Year} => rating: {rating.RatingNumber}");
+        }
         public static Rating RateBook(Member member, Book book, int ratingNumber)
         {
             Rating? rating = null;
@@ -57,8 +79,8 @@ namespace BookRecommendationSystem
             string? line;
             while ((line = reader.ReadLine()) != null )
             {
+                int memberIndex = count / 2;
                 count++;
-                int memberIndex = 0;
                 if (count % 2 == 0)
                 {
                     string[] ratingData = line.Split(' ');
@@ -74,7 +96,6 @@ namespace BookRecommendationSystem
                         };
                         Ratings.Add(rating);
                     }
-                    memberIndex++;
                 }
                 else
                 {

@@ -9,6 +9,7 @@
             bool filesFound = false;
             bool InMainMenu = true;
             bool IsLoggedIn = false;
+            int accountNumber = -1;
             string? booksFilePath;
             string? ratingsFilePath;
             StreamReader booksReader = null;
@@ -85,12 +86,12 @@
                 string input = Console.ReadLine();
                 if (int.TryParse(input, out int selectedNumber))
                 {
+                    Console.WriteLine();
                 }
                 else
                 {
                     Console.WriteLine("Invalid input, please enter a valid number.");
                 }
-                Console.WriteLine();
                 switch (selectedNumber)
                 {
                     case 1:
@@ -100,9 +101,9 @@
                     case 3:
                         if (!IsLoggedIn)
                         {
-                            Console.Write("Enter member account: ");
+                            Console.Write("Enter member account number: ");
                             string input2 = Console.ReadLine();
-                            if (int.TryParse(input2, out int accountNumber))
+                            if (int.TryParse(input2, out accountNumber))
                             {
                             }
                             else
@@ -124,9 +125,59 @@
                                 Console.WriteLine();
                             }
                         }
+                        else
+                        {
+                            Console.Write("Enter the ISBN for the book you'd like to rate: ");
+                            string input3 = Console.ReadLine();
+                            if (int.TryParse(input3, out int bookISBN))
+                            {
 
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input, please enter a valid number.");
+                            }
+                            Console.Write("Enter your rating: ");
+                            string input4 = Console.ReadLine();
+                            if (int.TryParse(input4, out int bookRating))
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input, please enter a valid number.");
+                            }
+                            BookSystem.RateBook(bookISBN, accountNumber - 1, bookRating);
+                        }
                         break;
                     case 4:
+                        if (!IsLoggedIn)
+                        {
+                            InMainMenu = false;
+                        }
+                        else
+                        {
+                            BookSystem.ViewRatings(accountNumber - 1);
+                        }
+                            break;
+                    case 5:
+                        break;
+                    case 6:
+                        if (IsLoggedIn)
+                        {
+                            try
+                            {
+                                Console.WriteLine();
+                                IsLoggedIn = false;
+                                Console.WriteLine($"{BookSystem.Members[accountNumber - 1].Name}, you are logged out!");
+                                Console.WriteLine();
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("An Error has occured");
+                            }
+
+                        }
                         break;
                     default:
                         Console.WriteLine("Wrong Number");
