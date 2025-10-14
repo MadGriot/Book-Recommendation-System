@@ -95,6 +95,11 @@
                 switch (selectedNumber)
                 {
                     case 1:
+                        Console.Write("Enter the name of the new member: ");
+                        string memberName = Console.ReadLine();
+                        Member member = new Member(memberName, BookSystem.Members.Count);
+                        BookSystem.AddNewMember(member);
+                        Console.WriteLine($"{member.Name} (account #: {member.AccountNumber + 1}) was added.");
                         break;
                     case 2:
                         break;

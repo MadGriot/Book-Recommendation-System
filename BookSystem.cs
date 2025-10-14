@@ -105,5 +105,32 @@ namespace BookRecommendationSystem
             }
             return Members.Count;
         }
+
+        public static void BookRecommendations()
+        {
+            Dictionary<Book, int> books = new();
+
+            foreach (Rating rating in Ratings)
+            {
+
+            }
+        }
+
+        public static void AddNewMember(Member member)
+        {
+            Members.Add(member);
+            foreach (Book book in Books)
+            {
+                Rating rating = new Rating()
+                {
+                    Book = book,
+                    Member = member,
+                    RatingNumber = 0,
+                };
+                Ratings.Add(rating);
+            }
+
+        }
+        public static int Dot(int a, int b) => a * b;
     }
 }
