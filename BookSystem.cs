@@ -6,8 +6,6 @@ namespace BookRecommendationSystem
         public static List<Rating> Ratings = new();
         public static List<Book> Books = new();
         public static List<Member> Members = new();
-        //public static void LoginMember(Member member) => member.IsLoggedIn = true;
-        //public static void LogoutMember(Member member) => member.IsLoggedIn = false;
 
         public static void ViewRatings(int accountNumber)
         {
@@ -59,14 +57,7 @@ namespace BookRecommendationSystem
             {
                 count++;
                 string[] bookData = line.Split(',', StringSplitOptions.RemoveEmptyEntries);
-                DateTime date;
-                Book book = new Book()
-                {
-                    ISBN = count,
-                    Author = bookData[0],
-                    Title = bookData[1],
-                    Year = bookData[2]
-                };
+                Book book = new Book(count, bookData[0], bookData[1], bookData[2]);
                 Books.Add(book);
             }
 
@@ -106,15 +97,64 @@ namespace BookRecommendationSystem
             return Members.Count;
         }
 
-        public static void BookRecommendations()
+        public static int CalculateSimilarity(Member member1, Member member2)
         {
-            Dictionary<Book, int> books = new();
+            List<Rating> member1Ratings = Ratings.Where(r => r.Member.Equals(member1)).ToList();
+            List<Rating> member2Ratings = Ratings.Where(r => r.Member.Equals(member2)).ToList();
 
-            foreach (Rating rating in Ratings)
+            int similarity = 0;
+
+            for (int i = 0; i < member1Ratings.Count; i++)
             {
-
+                if (member1Ratings[i].RatingNumber != 0 && member2Ratings[i].RatingNumber != 0)
+                {
+                    similarity += member1Ratings[i].RatingNumber * member2Ratings[i].RatingNumber;
+                }
             }
+            return similarity;
         }
+
+        // Get similar users and recommend books based on their ratings
+        public static void BookRecommendations(int accountNumber)
+        {
+            Member member = Members[accountNumber];
+            Dictionary<int, int> similarityScores = new Dictionary<int, int>();
+            for (int i = 0; i < Members.Count; i++)
+            {
+                if (i == accountNumber)
+                    continue;
+                int similarity = CalculateSimilarity(member, Members[i]);
+                similarityScores[i] = similarity;
+            }
+
+            var mostSimilarUsers = similarityScores.OrderByDescending(x => x.Value).ToList();
+
+            int mostSimilarUserId = mostSimilarUsers.First().Key;
+            Console.WriteLine($"Most similar user to {member.Name}: {Members[mostSimilarUserId].Name}");
+
+            List<Book> recommendedBooks = new List<Book>();
+            foreach (Rating rating in Ratings.Where(r => r.Member.AccountNumber == mostSimilarUserId + 1))
+            {
+                if (Ratings.Any(r => r.Member.AccountNumber == accountNumber + 1 && r.Book == rating.Book && r.RatingNumber == 0))
+                {
+                    recommendedBooks.Add(rating.Book);
+                }
+            }
+
+            Console.WriteLine($"{member.Name}'s Recommended Books:");
+            foreach (Book book in recommendedBooks.Take(4))
+            {
+                Console.WriteLine($"{book.ISBN}, {book.Title} ({book.Year}) by {book.Author}");
+            }
+
+            if (recommendedBooks.Count == 0)
+            {
+                Console.WriteLine("No new recommendations. You have rated all available books.");
+            }
+
+            Console.WriteLine();
+        }
+
 
         public static void AddNewMember(Member member)
         {
@@ -131,6 +171,21 @@ namespace BookRecommendationSystem
             }
 
         }
-        public static int Dot(int a, int b) => a * b;
+
+        public static void AddNewBook(Book book)
+        {
+            Books.Add(book);
+            foreach (Member member in Members)
+            {
+                Rating rating = new Rating()
+                {
+                    Book = book,
+                    Member = member,
+                    RatingNumber = 0,
+                };
+                Ratings.Add(rating);
+
+            }
+        }
     }
 }

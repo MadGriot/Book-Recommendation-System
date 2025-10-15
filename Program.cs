@@ -102,6 +102,14 @@
                         Console.WriteLine($"{member.Name} (account #: {member.AccountNumber + 1}) was added.");
                         break;
                     case 2:
+                        Console.Write("Enter the author of the new book: ");
+                        string bookAuthor = Console.ReadLine();
+                        Console.Write("Enter the title of the new book: ");
+                        string bookName = Console.ReadLine();
+                        Console.Write("Enter the year (or range of years) of the new book: ");
+                        string bookYear = Console.ReadLine();
+                        Book book = new Book(BookSystem.Books.Count + 1, bookAuthor, bookName, bookYear);
+                        BookSystem.AddNewBook(book);
                         break;
                     case 3:
                         if (!IsLoggedIn)
@@ -166,6 +174,10 @@
                         }
                             break;
                     case 5:
+                        if (IsLoggedIn)
+                        {
+                            BookSystem.BookRecommendations(accountNumber - 1);
+                        }
                         break;
                     case 6:
                         if (IsLoggedIn)
