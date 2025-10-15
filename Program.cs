@@ -16,47 +16,47 @@
             StreamReader ratingsReader = null;
 
             //Test Code:
-            booksFilePath = "C:\\Users\\Insan\\source\\repos\\BookRecommendationSystem\\BookRecommendationSystem\\Files\\books.txt";
-            ratingsFilePath = "C:\\Users\\Insan\\source\\repos\\BookRecommendationSystem\\BookRecommendationSystem\\Files\\ratings.txt";
-            Console.WriteLine();
-            booksReader = new StreamReader(booksFilePath);
-            ratingsReader = new StreamReader(ratingsFilePath);
-            int numberOfBooks = BookSystem.CountAndStoreBooks(booksReader);
-            Console.WriteLine($"Number of Books: {numberOfBooks}");
-            int numberOfMembers = BookSystem.CountAndStoreMembers(ratingsReader);
-            Console.WriteLine($"Number of Members: {numberOfMembers}");
+            //booksFilePath = "C:\\Users\\Insan\\source\\repos\\BookRecommendationSystem\\BookRecommendationSystem\\Files\\books.txt";
+            //ratingsFilePath = "C:\\Users\\Insan\\source\\repos\\BookRecommendationSystem\\BookRecommendationSystem\\Files\\ratings.txt";
+            //Console.WriteLine();
+            //booksReader = new StreamReader(booksFilePath);
+            //ratingsReader = new StreamReader(ratingsFilePath);
+            //int numberOfBooks = BookSystem.CountAndStoreBooks(booksReader);
+            //Console.WriteLine($"Number of Books: {numberOfBooks}");
+            //int numberOfMembers = BookSystem.CountAndStoreMembers(ratingsReader);
+            //Console.WriteLine($"Number of Members: {numberOfMembers}");
 
-            //while (!filesFound)
-            //{
-            //    Console.Write("Enter books file: ");
-            //    booksFilePath = Console.ReadLine();
-            //    Console.Write("Enter ratings file: ");
-            //    ratingsFilePath = Console.ReadLine();
+            while (!filesFound)
+            {
+                Console.Write("Enter books file path: ");
+                booksFilePath = Console.ReadLine();
+                Console.Write("Enter ratings file path: ");
+                ratingsFilePath = Console.ReadLine();
 
 
-            //    try
-            //    {
-            //        booksReader = new StreamReader(booksFilePath);
-            //        ratingsReader = new StreamReader(ratingsFilePath);
+                try
+                {
+                    booksReader = new StreamReader(booksFilePath);
+                    ratingsReader = new StreamReader(ratingsFilePath);
 
-            //        filesFound = true;
-            //    }
-            //    catch (FileNotFoundException)
-            //    {
-            //        Console.WriteLine("One of your file paths is incorrect.");
-            //        continue;
-            //    }
-            //    catch (Exception)
-            //    {
-            //        Console.WriteLine("An error has occured.");
-            //        continue;
-            //    }
-            //    Console.WriteLine();
-            //    int numberOfBooks = BookSystem.CountAndStoreBooks(booksReader);
-            //    Console.WriteLine($"Number of Books: {numberOfBooks}");
-            //    int numberOfMembers = BookSystem.CountAndStoreMembers(ratingsReader);
-            //    Console.WriteLine($"Number of Members: {numberOfMembers}");
-            //}
+                    filesFound = true;
+                }
+                catch (FileNotFoundException)
+                {
+                    Console.WriteLine("One of your file paths is incorrect.");
+                    continue;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("An error has occured.");
+                    continue;
+                }
+                Console.WriteLine();
+                int numberOfBooks = BookSystem.CountAndStoreBooks(booksReader);
+                Console.WriteLine($"Number of Books: {numberOfBooks}");
+                int numberOfMembers = BookSystem.CountAndStoreMembers(ratingsReader);
+                Console.WriteLine($"Number of Members: {numberOfMembers}");
+            }
 
 
             while (InMainMenu)
